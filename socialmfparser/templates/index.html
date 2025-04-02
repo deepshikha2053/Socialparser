@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Forensic Tool</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Social Media Forensic Tool</h1>
+        
+        <!-- Form to select platform and input search query -->
+        <form method="POST" action="{% url 'generate-report' %}">
+            {% csrf_token %}
+            
+            <label for="platform">Select Social Media Platform:</label>
+            <select name="platform" id="platform" required>
+                <option value="reddit">Reddit</option>
+                <option value="instagram">Instagram</option>
+            </select>
+
+            <!-- Search Query (Only for Reddit) -->
+            <div id="query-section">
+                <label for="query">Enter Search Query:</label>
+                <input type="text" name="query" id="query" placeholder="Enter subreddit name (e.g., technology)" required>
+            </div>
+
+            <!-- Instagram credentials (Only for Instagram) -->
+            <div id="instagram-credentials" style="display: none;">
+                <label for="username">Instagram Username:</label>
+                <input type="text" name="username" id="username" placeholder="Enter Instagram Username">
+
+                <label for="password">Instagram Password:</label>
+                <input type="password" name="password" id="password" placeholder="Enter Instagram Password">
+            </div>
+            
+            <button type="submit">Fetch Data</button>
+        </form>
+        
+        <!-- Display download link for the generated report -->
+        {% if file_url %}
+        <div class="download-section">
+            <p>Forensic report generated successfully!</p>
+            <a href="{{ file_url }}" download class="download-btn">Download Forensic Report (PDF)</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var platformSelect = document.getElementById('platform');
+            var instagramCredentials = document.getElementById('instagram-credentials');
+            var querySection = document.getElementById('query-section');
+            var queryInput = document.getElementById('query');
+
+            platformSelect.addEventListener('change', function () {
+                if (this.value === 'instagram') {
+                    instagramCredentials.style.display = 'block';
+                    querySection.style.display = 'none';
+                    queryInput.removeAttribute('required');
+                } else {
+                    instagramCredentials.style.display = 'none';
+                    querySection.style.display = 'block';
+                    queryInput.setAttribute('required', 'true');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

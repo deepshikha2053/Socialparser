@@ -1,0 +1,18 @@
+{
+    "User": "John Doe",
+    "Platform": "Facebook",
+    "Posts": [
+        {
+            "Date": "2025-01-01",
+            "Content": "Hello, this is a test post.",
+            "Likes": 120,
+            "Shares": 10
+        },
+        {
+            "Date": "2025-01-05",
+            "Content": "Another post for testing.",
+            "Likes": 45,
+            "Shares": 5
+        }
+    ]
+}

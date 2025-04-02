@@ -1,0 +1,11 @@
+{
+    "username": "deepshikha",
+    "following": 120,
+    "age": 22,
+    "email": "deepshikha@example.com",
+    "phone": "+91XXXXXXXXXX",
+    "tweets": [
+        "First tweet about AI",
+        "Second tweet about Django"
+    ]
+}
